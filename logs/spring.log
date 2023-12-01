@@ -459,3 +459,27 @@ Caused by: com.alibaba.nacos.api.exception.NacosException: Client not connected,
 2023-12-01 18:57:13.390  WARN 7244 --- [Thread-7] c.a.n.common.http.HttpClientBeanHolder   : [HttpClientBeanHolder] Start destroying common HttpClient
 2023-12-01 18:57:13.390  WARN 7244 --- [Thread-16] c.a.nacos.common.notify.NotifyCenter     : [NotifyCenter] Start destroying Publisher
 2023-12-01 18:57:13.390  WARN 7244 --- [Thread-16] c.a.nacos.common.notify.NotifyCenter     : [NotifyCenter] Destruction of the end
+2023-12-01 19:03:50.157  INFO 16508 --- [restartedMain] com.yc.ResfoodApp                        : The following 1 profile is active: "prod"
+2023-12-01 19:03:51.024  INFO 16508 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode!
+2023-12-01 19:03:51.024  INFO 16508 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2023-12-01 19:03:51.048  INFO 16508 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 6 ms. Found 0 Redis repository interfaces.
+2023-12-01 19:03:51.251  INFO 16508 --- [restartedMain] o.s.cloud.context.scope.GenericScope     : BeanFactory id=a16ed504-23c8-36e5-95bc-dc472d6aa9e0
+2023-12-01 19:03:51.721  INFO 16508 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 9200 (http)
+2023-12-01 19:03:51.814  INFO 16508 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1642 ms
+2023-12-01 19:03:51.981  INFO 16508 --- [restartedMain] com.yc.config.MyDruidDataSourceConfig    : 使用的编程式的数据源创建.
+2023-12-01 19:03:56.912  INFO 16508 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2023-12-01 19:03:57.771  INFO 16508 --- [restartedMain] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 20 endpoint(s) beneath base path '/actuator'
+2023-12-01 19:03:57.841  INFO 16508 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 9200 (http) with context path ''
+2023-12-01 19:03:57.851  INFO 16508 --- [restartedMain] c.a.n.p.a.s.c.ClientAuthPluginManager    : [ClientAuthPluginManager] Load ClientAuthService com.alibaba.nacos.client.auth.impl.NacosClientAuthServiceImpl success.
+2023-12-01 19:03:57.851  INFO 16508 --- [restartedMain] c.a.n.p.a.s.c.ClientAuthPluginManager    : [ClientAuthPluginManager] Load ClientAuthService com.alibaba.nacos.client.auth.ram.RamClientAuthServiceImpl success.
+2023-12-01 19:03:57.971  INFO 16508 --- [restartedMain] c.a.c.n.registry.NacosServiceRegistry    : nacos registry, DEFAULT_GROUP resfood 173.18.13.8:9200 register finished
+2023-12-01 19:03:58.082  INFO 16508 --- [http-nio-9200-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2023-12-01 19:03:58.082  INFO 16508 --- [http-nio-9200-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 0 ms
+2023-12-01 19:03:58.182  INFO 16508 --- [http-nio-9200-exec-1] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} inited
+2023-12-01 19:03:58.861  INFO 16508 --- [restartedMain] s.a.ScheduledAnnotationBeanPostProcessor : No TaskScheduler/ScheduledExecutorService bean found for scheduled processing
+2023-12-01 19:03:58.871  INFO 16508 --- [restartedMain] com.yc.ResfoodApp                        : Started ResfoodApp in 14.007 seconds (JVM running for 15.563)
+2023-12-01 19:03:58.891  INFO 16508 --- [restartedMain] c.a.c.n.refresh.NacosContextRefresher    : [Nacos Config] Listening config: dataId=mysql8local.yml, group=DEFAULT_GROUP
+2023-12-01 19:03:58.891  INFO 16508 --- [restartedMain] c.a.c.n.refresh.NacosContextRefresher    : [Nacos Config] Listening config: dataId=redislocal.yml, group=DEFAULT_GROUP
+2023-12-01 19:03:58.891  INFO 16508 --- [restartedMain] c.a.c.n.refresh.NacosContextRefresher    : [Nacos Config] Listening config: dataId=res-foods.yml, group=DEFAULT_GROUP
+2023-12-01 19:03:58.891  INFO 16508 --- [restartedMain] c.a.c.n.refresh.NacosContextRefresher    : [Nacos Config] Listening config: dataId=res-foods, group=DEFAULT_GROUP
+2023-12-01 19:03:58.891  INFO 16508 --- [restartedMain] c.a.c.n.refresh.NacosContextRefresher    : [Nacos Config] Listening config: dataId=res-foods-prod.yml, group=DEFAULT_GROUP
