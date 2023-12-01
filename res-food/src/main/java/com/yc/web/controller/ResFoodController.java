@@ -8,9 +8,14 @@ import com.yc.web.model.MyPageBean;
 //import io.swagger.annotations.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.bind.annotation.*;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -22,6 +27,8 @@ import java.util.Map;
 //tags="说明该类的作用，可以在前台界面上看到的注解"
 //value="该参数无意义，在UI界面上看不到，不需要配置"
 //@Api(value = "ResFoodController", tags = "菜品的控制层")
+//动态刷新配置
+@RefreshScope  //只能在类和方法上标明,要求actuator暴露了endpoints端点,
 public class ResFoodController {
 
     @Autowired
@@ -29,6 +36,20 @@ public class ResFoodController {
 
     @Autowired
     private RedisTemplate redisTemplate;
+
+    @Value("${res.pattern.dateFormat}")
+    private String dateFormatString; //利用di机制从属性文件读取配置
+
+    @RequestMapping(value = "timeService",method={RequestMethod.GET})
+    public Map<String,Object> timeService(){
+        Date date = new Date();
+        DateFormat df = new SimpleDateFormat(dateFormatString);
+        String dString = df.format(date);
+        Map<String ,Object> map = new HashMap<>();
+        map.put("code",1);
+        map.put("obj",dString);
+        return map;
+    }
 
     //@ApiOperation 注解在用于对一个操作或HTTP方法进行描述
     //@ApiOperation("查看详情次数增加")

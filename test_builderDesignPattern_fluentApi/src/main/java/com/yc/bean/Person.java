@@ -11,7 +11,7 @@ public class Person {
     }
 
     public static final class Builder{
-        private String name;
+        private String name;        
         private Integer age;
         private String gender;
 

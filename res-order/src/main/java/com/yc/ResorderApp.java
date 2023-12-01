@@ -8,7 +8,7 @@ import org.springframework.cloud.openfeign.FeignClient;
 
 @SpringBootApplication
 @EnableDiscoveryClient
-@EnableFeignClients(value = {"com.yc.api"})
+@EnableFeignClients(basePackages = {"com.yc.api"})
 public class ResorderApp {
     public static void main(String[] args) {
         SpringApplication.run(ResorderApp.class,args);
