@@ -11,8 +11,10 @@ import org.springframework.web.client.RestTemplate;
 @Configuration
 //@LoadBalancerClient(name = "resfood",configuration = {OnlyOneLoadBalancerConfiguration.class})
 @LoadBalancerClients(
-        value = @LoadBalancerClient(name = "resfood",configuration = {OnlyOneLoadBalancerConfiguration.class})
-        ,defaultConfiguration = LoadBalancerClientConfiguration.class
+        value = {
+                @LoadBalancerClient(name = "resfood",configuration = {OnlyOneLoadBalancerConfiguration.class}),
+                @LoadBalancerClient(name = "resorder",configuration = {OnlyOneLoadBalancerConfiguration.class})
+        },defaultConfiguration = LoadBalancerClientConfiguration.class
 )
 public class WebConfig {
     @LoadBalanced //负载均衡 => resfood服务下有两个服务节点 一个请求会访问哪个节点?

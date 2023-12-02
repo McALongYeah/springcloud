@@ -6,6 +6,7 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="test_sentinel_1" />
         <module name="back-jdkproxy" />
         <module name="res-api" />
         <module name="res-food" />
@@ -29,6 +30,7 @@
       <module name="springcloud-project_1" options="-parameters" />
       <module name="test_builderDesignPattern_fluentApi" options="-parameters" />
       <module name="test_feign" options="-parameters" />
+      <module name="test_sentinel_1" options="-parameters" />
       <module name="text_builder" options="-parameters" />
     </option>
   </component>

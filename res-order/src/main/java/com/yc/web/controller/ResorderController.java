@@ -1,7 +1,10 @@
 package com.yc.web.controller;
 
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.yc.api.ResfoodApi;
+import com.yc.bean.Resfood;
+import com.yc.web.model.CartItem;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -42,7 +45,74 @@ public class ResorderController {
 //        //方案一直接使用ip:端口
 //        Map<String,Object> result = this.restTemplate.getForObject("http://localhost:9000/resfood/findById?fid=" + fid,Map.class);
         log.info("发送请求后返回的商品信息:" + result);
+        if (!"1".equals(result.get("code").toString())){
+            map.put("code","0");
+            map.put("msg","查无此商品");
+            return map;
+        }
+        ObjectMapper objectMapper = new ObjectMapper();
+        Resfood food = objectMapper.convertValue(result.get("obj"),Resfood.class);
+
+        //         * 2.从session 中取出Cart (map)
+        Map<Integer, CartItem> cart = new HashMap<Integer, CartItem>();
+        if (session.getAttribute("cart") != null){
+            cart = (Map<Integer, CartItem>) session.getAttribute("cart");
+        }else {
+            session.setAttribute("cart",cart);
+        }
+
+//         * 3.判断这个商品在Cart(map)中是否存在
+        CartItem ci;
+        //判断这个商品在cart（map）是否有
+        if (cart.containsKey(fid)){
+            ci = cart.get(fid);
+            ci.setNum(ci.getNum() + num);
+            cart.put(fid,ci);
+        }else {
+            //         * 4.没有 则创建一个CartItem 存到map 中
+            ci = new CartItem();
+            ci.setNum(num);
+            ci.setFood(food);
+            cart.put(fid,ci);
+        }
+
+//         * 5.有增加数量]
+
+        //处理数量
+        if (ci.getNum() <= 0){
+            cart.remove(fid);
+        }
+        session.setAttribute("cart",cart);
+        map.put("code",1);
+        map.put("obj",cart.values());
+        return map;
+
+    }
+
+    @RequestMapping(value = "getCartInfo" ,method = {RequestMethod.GET,RequestMethod.POST} )
+    //ApiParam 用在请求参数前面,用于对参数进行描述或说明是否为必添项等说明
+    public Map<String,Object> getCartInfo(HttpSession session) {
+        Map<String, Object> map = new HashMap<>();
+        if (session.getAttribute("cart")==null || ((Map<Integer, CartItem>) session.getAttribute("cart")).size() <= 0){
+            map.put("code",0);
+            return map;
+        }
+        Map<Integer,CartItem> cart = (Map<Integer, CartItem>) session.getAttribute("cart");
+        map.put("code",1);
+        map.put("obj",cart.values()); //cart.values 返回的是map 的值的set
         return map;
     }
+
+    @RequestMapping(value = "clearAll" ,method = {RequestMethod.GET,RequestMethod.POST} )
+    //ApiParam 用在请求参数前面,用于对参数进行描述或说明是否为必添项等说明
+    public Map<String,Object> clearAll(HttpSession session) {
+        Map<String, Object> map = new HashMap<>();
+        session.removeAttribute("cart");
+        session.removeAttribute("code");
+        map.put("code",1);
+        return map;
+    }
+
+
 
 }

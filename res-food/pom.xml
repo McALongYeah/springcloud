@@ -29,15 +29,15 @@
         </dependency>
 
 
-<!--        感知代码的修改,自动重载服务器-->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-devtools</artifactId>
-<!--         编译时   -->
-            <scope>runtime</scope>
-<!--            测试qi-->
-            <optional>true</optional>
-        </dependency>
+<!--&lt;!&ndash;        感知代码的修改,自动重载服务器&ndash;&gt;-->
+<!--        <dependency>-->
+<!--            <groupId>org.springframework.boot</groupId>-->
+<!--            <artifactId>spring-boot-devtools</artifactId>-->
+<!--&lt;!&ndash;         编译时   &ndash;&gt;-->
+<!--            <scope>runtime</scope>-->
+<!--&lt;!&ndash;            测试qi&ndash;&gt;-->
+<!--            <optional>true</optional>-->
+<!--        </dependency>-->
 
 <!--        日志-->
         <dependency>
@@ -117,6 +117,12 @@
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-bootstrap</artifactId>
+        </dependency>
+
+        <!-- sentinel 客户端依赖 -->
+        <dependency>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-starter-alibaba-sentinel</artifactId>
         </dependency>
     </dependencies>
 

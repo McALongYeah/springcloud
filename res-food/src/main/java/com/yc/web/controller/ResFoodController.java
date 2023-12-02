@@ -15,10 +15,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @RestController
 @RequestMapping("resfood")
@@ -39,6 +36,15 @@ public class ResFoodController {
 
     @Value("${res.pattern.dateFormat}")
     private String dateFormatString; //利用di机制从属性文件读取配置
+
+    public Set<Thread> set= new HashSet<>();
+    @GetMapping("/test")
+    public Object test() throws InterruptedException {
+        Thread thread = Thread.currentThread();
+        set.add(thread);
+        log.info(    "线程数为:"+ set.size() +",当前线程编号为:"+ thread.getId() );
+        return thread.toString();
+    }//  然后访问服务，查看输出信息
 
     @RequestMapping(value = "timeService",method={RequestMethod.GET})
     public Map<String,Object> timeService(){

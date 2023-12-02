@@ -3,6 +3,19 @@ server:
 
 
 spring:
+  session:
+    store-type: redis #将session保存到redis中
+    redis:
+      database: 1 #redis 默认0-15总共16个库 这里采用1库
+      host: 127.0.0.1  #到docker后修改，还要加上用户名和密码，且redis中配置访问的主机的ip，以提高安全性
+      lettuce:
+        pool:
+          max-active: 8
+          max-wait: -1ms
+          max-idle: 5
+          min-idle: 0
+      port: 6379
+      timeout: 5000
   cloud:
     nacos:
       discovery:
@@ -30,5 +43,6 @@ feign:
         - application/xml
         - application/json
       min-request-size: 2048 #超过2048字节进行压缩
+      enabled: true
     response:
       enabled: true

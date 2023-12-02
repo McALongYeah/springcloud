@@ -14,11 +14,20 @@ import org.springframework.core.env.Environment;
 @Configuration
 public class OnlyOneLoadBalancerConfiguration {
 
-        //配置自定义策略
-        @Bean
-        public ReactorServiceInstanceLoadBalancer OnlyOneReactorServiceInstanceLoadBalancer(Environment environment, LoadBalancerClientFactory loadBalancerClientFactory) {
-            String name = environment.getProperty(LoadBalancerClientFactory.PROPERTY_NAME);
-            //随机RandomLoadBalancer；轮询RoundRobinLoadBalancer
-            return new OnlyOneLoadBalancer(loadBalancerClientFactory.getLazyProvider(name, ServiceInstanceListSupplier.class));
-        }
+//        //配置自定义策略
+//        @Bean
+//        public ReactorServiceInstanceLoadBalancer OnlyOneReactorServiceInstanceLoadBalancer(Environment environment, LoadBalancerClientFactory loadBalancerClientFactory) {
+//            String name = environment.getProperty(LoadBalancerClientFactory.PROPERTY_NAME);
+//            //随机RandomLoadBalancer；轮询RoundRobinLoadBalancer
+//            return new OnlyOneLoadBalancer(loadBalancerClientFactory.getLazyProvider(name, ServiceInstanceListSupplier.class));
+//        }
+
+
+        //配置成轮询
+    @Bean
+    public ReactorServiceInstanceLoadBalancer roundRobinReactorServiceInstanceLoadBalancer(Environment environment, LoadBalancerClientFactory loadBalancerClientFactory) {
+        String name = environment.getProperty(LoadBalancerClientFactory.PROPERTY_NAME);
+        //随机RandomLoadBalancer；轮询RoundRobinLoadBalancer
+        return new RoundRobinLoadBalancer(loadBalancerClientFactory.getLazyProvider(name, ServiceInstanceListSupplier.class), name);
+    }
 }
