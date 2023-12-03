@@ -1,5 +1,6 @@
 package com.yc.web.controller;
 
+import com.alibaba.csp.sentinel.annotation.SentinelResource;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.yc.bean.Resfood;
 import com.yc.biz.ResFoodBiz;
@@ -143,6 +144,7 @@ public class ResFoodController {
     }
 
     @RequestMapping("/findByPage")
+    @SentinelResource("hotkey-page") //流控资源名
     public Map<String,Object> findByPage(@RequestParam int pageno,@RequestParam int pagesize,@RequestParam(required = false)  String sortby,@RequestParam (required = false) String sort){
         Map<String,Object> map = new HashMap<>(); //返回的json字符串
         //此处的Page 是dao层的组件,这种被称为PO对象（持久化对象-》与表结构相同），到controller层要进行转化 转化成vo对象(值对象->为了页面展示需要)

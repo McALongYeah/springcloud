@@ -17,6 +17,12 @@ spring:
       port: 6379
       timeout: 5000
   cloud:
+    sentinel: #sentinel配置
+      web-context-unify: false #关闭context整合
+      transport:
+        port: 8719                  #跟控制台交流的端口,随意指定一个未使用的端口即可
+        dashboard: localhost:9999   #dashboard地址与端口
+      eager: true
     nacos:
       discovery:
         server-addr: localhost:8848

@@ -4,18 +4,17 @@ package com.yc.web.controller;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.yc.api.ResfoodApi;
 import com.yc.bean.Resfood;
+import com.yc.biz.GoodsBiz;
 import com.yc.web.model.CartItem;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
 import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
 
 @RestController
 @RequestMapping("resorder")
@@ -31,6 +30,44 @@ public class ResorderController {
 
     @Autowired
     private ResfoodApi resfoodApi;
+
+    @Autowired
+    private GoodsBiz goodsBiz;
+
+    @GetMapping("payAction")
+    public Map<String,Object> payAction(   Integer flag    ) throws InterruptedException {
+//        //TODO: 1. 测试慢请求
+//        if( flag==null ){
+//            Thread.sleep(1000);
+//        }
+        //2.异常数
+        Random r = new Random();
+        int a = r.nextInt(5);
+        if (a==0||a==1){
+            throw new RuntimeException("发生异常");
+        }
+        Map<String,Object> map=new HashMap<>( );
+        //取出当前用户的订单金额,调用第三方接口，完成支付.
+        map.put("code",1);
+        return map;
+    }
+
+
+    @RequestMapping(value = "serviceA",method = {RequestMethod.GET,RequestMethod.POST})
+    public Map<String,Object> serviceA(){
+        Map<String,Object> map = new HashMap<>();
+        goodsBiz.goodsInfo();
+        map.put("code",1);
+        return map;
+    }
+
+    @RequestMapping(value = "serviceB",method = {RequestMethod.GET,RequestMethod.POST})
+    public Map<String,Object> serviceB(){
+        Map<String,Object> map = new HashMap<>();
+        goodsBiz.goodsInfo();
+        map.put("code",1);
+        return map;
+    }
 
     @RequestMapping(value = "addCart" ,method = {RequestMethod.GET,RequestMethod.POST} )
     public Map<String,Object> addCart(@RequestParam Integer fid, @RequestParam Integer num, HttpSession session) {
