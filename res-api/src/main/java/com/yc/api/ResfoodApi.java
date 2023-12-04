@@ -1,6 +1,7 @@
 package com.yc.api;
 
 
+import feign.Headers;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,7 +12,7 @@ public interface ResfoodApi {
 
     public Map<String,Object> detailCountAdd(@RequestParam Integer fid);
 
-
+//    @Headers("Original=resorder")
     @GetMapping( "resfood/findById/{fid}")
     public Map<String,Object> findById(@PathVariable Integer fid);
 
