@@ -124,7 +124,21 @@
             <groupId>com.alibaba.cloud</groupId>
             <artifactId>spring-cloud-starter-alibaba-sentinel</artifactId>
         </dependency>
+
+
+        <!--将sentinel的BlockException 抛出 到外面统一由  MySentinelExceptionHandler处理  -->
+        <dependency>
+            <groupId>com.alibaba.csp</groupId>
+            <artifactId>sentinel-spring-webmvc-adapter</artifactId>
+        </dependency>
+        <!--单独对 ParamFlowException处理 -->
+        <dependency>
+            <groupId>com.alibaba.csp</groupId>
+            <artifactId>sentinel-parameter-flow-control</artifactId>
+        </dependency>
     </dependencies>
+
+
 
 
 </project>

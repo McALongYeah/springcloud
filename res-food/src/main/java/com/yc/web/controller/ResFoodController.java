@@ -1,6 +1,7 @@
 package com.yc.web.controller;
 
 import com.alibaba.csp.sentinel.annotation.SentinelResource;
+import com.alibaba.csp.sentinel.slots.block.BlockException;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.yc.bean.Resfood;
 import com.yc.biz.ResFoodBiz;
@@ -108,22 +109,44 @@ public class ResFoodController {
 //    @ApiImplicitParams({
 //            @ApiImplicitParam(name = "fid",value = "菜品号",required = true)
 //    })
+//@SentinelResource(value = "findById",blockHandler = "blockHandlerForFindById",fallback = "handleException")
+
+@SentinelResource(value = "hot-page")
     @GetMapping( "findById/{fid}")
     public Map<String,Object> findById(@PathVariable Integer fid){
         Map<String,Object> map=new HashMap<>();
 
         Resfood rf=null;
-        try{
+//        try{
             rf=this.resFoodBiz.findById(fid);
-        }catch (Exception ex){
-            ex.printStackTrace();
-            map.put("code",0);
-            map.put("msg","Error occurred while fetching data");
-        }
+//        }catch (Exception ex){
+//            ex.printStackTrace();
+//            map.put("code",0);
+//            map.put("msg","Error occurred while fetching data");
+//        }
         map.put("code",1);
         map.put("data",rf);
         return map;
     }
+
+    public Map<String,Object> handleException(Integer fid, Throwable exception){
+
+        Map<String,Object> map = new HashMap<>();
+        map.put("code",0);
+        map.put("msg","出现异常,异常信息为:" + exception.getMessage());
+        return map;
+    }
+
+    public Map<String,Object> blockHandlerForFindById(Integer fid, BlockException exception){
+        exception.printStackTrace();
+        Map<String,Object> map = new HashMap<>();
+        String errorInfo = fid + "发生的异常规则为" + exception.getRule() + "," + exception.getMessage();
+        map.put("code",0);
+        map.put("msg",errorInfo);
+        return map;
+    }
+
+
 
     @GetMapping("findAll")
 //    @ApiOperation(value = "查询所有菜品")
@@ -144,7 +167,7 @@ public class ResFoodController {
     }
 
     @RequestMapping("/findByPage")
-    @SentinelResource("hotkey-page") //流控资源名
+//    @SentinelResource("hotkey-page") //流控资源名
     public Map<String,Object> findByPage(@RequestParam int pageno,@RequestParam int pagesize,@RequestParam(required = false)  String sortby,@RequestParam (required = false) String sort){
         Map<String,Object> map = new HashMap<>(); //返回的json字符串
         //此处的Page 是dao层的组件,这种被称为PO对象（持久化对象-》与表结构相同），到controller层要进行转化 转化成vo对象(值对象->为了页面展示需要)
