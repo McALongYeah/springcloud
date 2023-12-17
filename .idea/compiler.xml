@@ -7,10 +7,12 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="test_sentinel_1" />
+        <module name="test-factoryMethodPattern" />
         <module name="back-jdkproxy" />
         <module name="res-api" />
         <module name="res-food" />
         <module name="res-order" />
+        <module name="res-gateway" />
         <module name="res-bean" />
         <module name="test_builderDesignPattern_fluentApi" />
         <module name="test_feign" />
@@ -26,8 +28,10 @@
       <module name="res-api" options="-parameters" />
       <module name="res-bean" options="-parameters" />
       <module name="res-food" options="-parameters" />
+      <module name="res-gateway" options="-parameters" />
       <module name="res-order" options="-parameters" />
       <module name="springcloud-project_1" options="-parameters" />
+      <module name="test-factoryMethodPattern" options="-parameters" />
       <module name="test_builderDesignPattern_fluentApi" options="-parameters" />
       <module name="test_feign" options="-parameters" />
       <module name="test_sentinel_1" options="-parameters" />

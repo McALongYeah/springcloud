@@ -18,6 +18,8 @@
         <module>res-api</module>
         <module>test_builderDesignPattern_fluentApi</module>
         <module>test_sentinel_1</module>
+        <module>res-gateway</module>
+        <module>test-factoryMethodPattern</module>
     </modules>
 
 
